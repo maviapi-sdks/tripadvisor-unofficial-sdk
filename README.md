@@ -89,7 +89,7 @@ print_r($result);
 
 ```ruby
 # Gemfile
-gem "tripadvisor_sdk", git: "https://github.com/maviapi-sdks/tripadvisor-unofficial-sdk"
+gem "tripadvisor_sdk", git: "https://github.com/maviapi-sdks/tripadvisor-unofficial-sdk", branch: "main"
 ```
 
 ```ruby
