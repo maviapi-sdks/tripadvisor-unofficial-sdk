@@ -1,0 +1,24 @@
+{
+  "name": "maviapi-sdks/tripadvisor-unofficial-sdk",
+  "description": "Unofficial Tripadvisor API client",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "tripadvisor",
+    "tripadvisor-api",
+    "unofficial",
+    "sdk",
+    "maviapi"
+  ],
+  "homepage": "https://maviapi.com/apis/tripadvisor",
+  "require": {
+    "php": ">=8.1",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "php/"
+    ]
+  }
+}

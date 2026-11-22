@@ -1,0 +1,32 @@
+{
+  "name": "tripadvisor-unofficial-sdk",
+  "version": "0.1.0",
+  "description": "Unofficial Tripadvisor API client",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./javascript/index.d.ts",
+      "default": "./javascript/index.js"
+    }
+  },
+  "types": "./javascript/index.d.ts",
+  "files": [
+    "javascript"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "tripadvisor",
+    "tripadvisor-api",
+    "unofficial",
+    "sdk",
+    "maviapi"
+  ],
+  "homepage": "https://maviapi.com/apis/tripadvisor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maviapi-sdks/tripadvisor-unofficial-sdk.git"
+  },
+  "license": "MIT"
+}

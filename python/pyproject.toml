@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tripadvisor-unofficial-sdk"
+version = "0.1.0"
+description = "Unofficial Tripadvisor API client"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["tripadvisor", "tripadvisor-api", "unofficial", "sdk", "maviapi"]
+
+[project.urls]
+Homepage = "https://maviapi.com/apis/tripadvisor"
+Repository = "https://github.com/maviapi-sdks/tripadvisor-unofficial-sdk"
+
+[tool.setuptools]
+packages = ["tripadvisor_sdk"]
