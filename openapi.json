@@ -1307,7 +1307,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-07-20"
+            "example": "2026-12-24"
           },
           {
             "name": "checkOutDate",
@@ -1317,7 +1317,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-07-22"
+            "example": "2026-12-26"
           },
           {
             "name": "adults",

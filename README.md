@@ -439,8 +439,8 @@ Methods: `hotel_offers` (Python, Ruby) · `hotelOffers` (JavaScript/TypeScript, 
 Parameters:
 
 - `geo` (string, required): TripAdvisor geo_id from /search. Example: `187147`.
-- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-07-20`.
-- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-07-22`.
+- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-12-24`.
+- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-12-26`.
 - `adults` (integer, optional): Number of adults. Example: `2`.
 - `rooms` (integer, optional): Number of rooms. Example: `1`.
 - `childrenAges` (string, optional): Comma-separated children ages, e.g. 4,9.
