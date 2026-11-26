@@ -227,6 +227,32 @@ module TripadvisorSdk
       get("/place", params, %w[id geo type])
     end
 
+    # Places inside a map box (north, south, east, west): attractions, restaurants or
+    # hotels, with coordinates, rating, ranking, price level, categories, website, phone,
+    # opening hours, address and a thumbnail.
+    #
+    # Each successful request uses 1 credit for every 100 rows it returns (at least 1
+    # credit).
+    #
+    # Parameters:
+    #   north (number, required): Northern edge of the map box, latitude in decimal
+    #     degrees (-90 to 90, above south)
+    #   south (number, required): Southern edge of the map box, latitude in decimal
+    #     degrees (-90 to 90)
+    #   east (number, required): Eastern edge of the map box, longitude in decimal
+    #     degrees (-180 to 180, above west; split a box that crosses the 180th meridian)
+    #   west (number, required): Western edge of the map box, longitude in decimal
+    #     degrees (-180 to 180)
+    #   type (string): Kind of place to list. One of: attractions, restaurants, hotels
+    #   limit (integer): Places per page (1-100)
+    #   offset (integer): Places to skip; walk it up to pagination.total. Attractions
+    #     and restaurants: the site returns at most 750 per box (data.capped), so zoom in
+    #     or split the box to reach more
+    #   refresh (boolean): Bypass and repopulate the cache
+    def places_in_area(**params)
+      get("/places-in-area", params, %w[north south east west])
+    end
+
     # Restaurants / eateries for a location (geo_id).
     #
     # Each successful request uses 1 credit for every 30 rows it returns (at least 1

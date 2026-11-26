@@ -253,6 +253,33 @@ class TripadvisorClient:
         """
         return self._get("/place", {"id": id, "geo": geo, "type": type, "refresh": refresh})
 
+    def places_in_area(self, *, north: float, south: float, east: float, west: float, type: Optional[str] = None, limit: Optional[int] = None, offset: Optional[int] = None, refresh: Optional[bool] = None) -> Dict[str, Any]:
+        """
+        Places inside a map box (north, south, east, west): attractions, restaurants or
+        hotels, with coordinates, rating, ranking, price level, categories, website, phone,
+        opening hours, address and a thumbnail.
+
+        Each successful request uses 1 credit for every 100 rows it returns (at least 1
+        credit).
+
+        Parameters:
+          north (number, required): Northern edge of the map box, latitude in decimal
+            degrees (-90 to 90, above south)
+          south (number, required): Southern edge of the map box, latitude in decimal
+            degrees (-90 to 90)
+          east (number, required): Eastern edge of the map box, longitude in decimal
+            degrees (-180 to 180, above west; split a box that crosses the 180th meridian)
+          west (number, required): Western edge of the map box, longitude in decimal
+            degrees (-180 to 180)
+          type (string): Kind of place to list. One of: attractions, restaurants, hotels
+          limit (integer): Places per page (1-100)
+          offset (integer): Places to skip; walk it up to pagination.total. Attractions
+            and restaurants: the site returns at most 750 per box (data.capped), so zoom in
+            or split the box to reach more
+          refresh (boolean): Bypass and repopulate the cache
+        """
+        return self._get("/places-in-area", {"north": north, "south": south, "east": east, "west": west, "type": type, "limit": limit, "offset": offset, "refresh": refresh})
+
     def restaurants(self, *, geo: str, page: Optional[int] = None, limit: Optional[int] = None, offset: Optional[int] = None, refresh: Optional[bool] = None) -> Dict[str, Any]:
         """
         Restaurants / eateries for a location (geo_id).

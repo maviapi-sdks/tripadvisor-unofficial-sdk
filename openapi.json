@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tripadvisor API",
-    "version": "2026-11-18",
+    "version": "2026-11-26",
     "description": "Trip-planning data from Tripadvisor: geo search plus attractions, restaurants and hotels by location (geo_id), with ratings, reviews, price and coordinates. Resolve a place name with /search, then list with /attractions, /restaurants, /hotels.\n\nEvery request needs an API key in the `Authorization: Bearer <key>` header. Create one at https://maviapi.com/dashboard/keys. A successful request uses one credit, unless its operation says more (`x-credits`). That price covers 200 rows (or the operation's `x-credits-rows`); a request that returns more pays it again for each further page of that many rows. The `x-maviapi-credits` response header says what a request cost.\n\nEndpoint reference with live examples: https://maviapi.com/apis/tripadvisor",
     "termsOfService": "https://maviapi.com/terms"
   },
@@ -87,6 +87,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -443,6 +463,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -918,6 +958,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1307,7 +1367,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-12-25"
+            "example": "2026-12-26"
           },
           {
             "name": "checkOutDate",
@@ -1317,7 +1377,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-12-27"
+            "example": "2026-12-28"
           },
           {
             "name": "adults",
@@ -1366,6 +1426,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -1713,6 +1793,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -2040,6 +2140,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -2440,6 +2560,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -2722,6 +2862,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -2976,6 +3136,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -3229,6 +3409,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -3500,6 +3700,539 @@
         }
       }
     },
+    "/places-in-area": {
+      "get": {
+        "operationId": "placesInArea",
+        "summary": "Places in a map box",
+        "description": "Places inside a map box (north, south, east, west): attractions, restaurants or hotels, with coordinates, rating, ranking, price level, categories, website, phone, opening hours, address and a thumbnail.\n\nEach successful request uses 1 credit for every 100 rows it returns (at least 1 credit).",
+        "x-credits": 1,
+        "x-credits-rows": 100,
+        "parameters": [
+          {
+            "name": "north",
+            "in": "query",
+            "required": true,
+            "description": "Northern edge of the map box, latitude in decimal degrees (-90 to 90, above south)",
+            "schema": {
+              "type": "number"
+            },
+            "example": 48.87
+          },
+          {
+            "name": "south",
+            "in": "query",
+            "required": true,
+            "description": "Southern edge of the map box, latitude in decimal degrees (-90 to 90)",
+            "schema": {
+              "type": "number"
+            },
+            "example": 48.85
+          },
+          {
+            "name": "east",
+            "in": "query",
+            "required": true,
+            "description": "Eastern edge of the map box, longitude in decimal degrees (-180 to 180, above west; split a box that crosses the 180th meridian)",
+            "schema": {
+              "type": "number"
+            },
+            "example": 2.36
+          },
+          {
+            "name": "west",
+            "in": "query",
+            "required": true,
+            "description": "Western edge of the map box, longitude in decimal degrees (-180 to 180)",
+            "schema": {
+              "type": "number"
+            },
+            "example": 2.33
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Kind of place to list",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "attractions",
+                "restaurants",
+                "hotels"
+              ],
+              "default": "attractions"
+            },
+            "example": "restaurants"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Places per page (1-100)",
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "example": 50
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Places to skip; walk it up to pagination.total. Attractions and restaurants: the site returns at most 750 per box (data.capped), so zoom in or split the box to reach more",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "description": "Bypass and repopulate the cache",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "box": {
+                          "type": [
+                            "object",
+                            "null"
+                          ],
+                          "properties": {
+                            "north": {
+                              "type": [
+                                "number",
+                                "null"
+                              ],
+                              "example": 48.87
+                            },
+                            "south": {
+                              "type": [
+                                "number",
+                                "null"
+                              ],
+                              "example": 48.85
+                            },
+                            "east": {
+                              "type": [
+                                "number",
+                                "null"
+                              ],
+                              "example": 2.36
+                            },
+                            "west": {
+                              "type": [
+                                "number",
+                                "null"
+                              ],
+                              "example": 2.33
+                            }
+                          }
+                        },
+                        "type": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "example": "attractions"
+                        },
+                        "total": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "description": "Places found in the box (attractions and restaurants: at most 750)",
+                          "example": 750
+                        },
+                        "capped": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ],
+                          "description": "True when the box holds more attractions or restaurants than the site returns in one call: zoom in to see the rest",
+                          "example": true
+                        },
+                        "places": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "Tripadvisor location id (use with /place, /reviews, /photos)",
+                                "example": "188757"
+                              },
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Louvre Museum"
+                              },
+                              "type": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "attraction, restaurant or hotel",
+                                "example": "attraction"
+                              },
+                              "geo_id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "The city or region the place belongs to",
+                                "example": "187147"
+                              },
+                              "url": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html"
+                              },
+                              "coordinates": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "properties": {
+                                  "latitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 48.861
+                                  },
+                                  "longitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 2.335833
+                                  }
+                                }
+                              },
+                              "rating": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ],
+                                "description": "Average traveler rating out of 5",
+                                "example": 4.6
+                              },
+                              "review_count": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 104685
+                              },
+                              "ranking_position": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "description": "Popularity rank among places of its kind in its city",
+                                "example": 17
+                              },
+                              "ranking_total": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "description": "Number of places in that ranking",
+                                "example": 12025
+                              },
+                              "ranking_string": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "The site's ranking text (hotels)",
+                                "example": "#1 of 1,897 hotels in Paris"
+                              },
+                              "price_level": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "Restaurants: $, $$ - $$$ or $$$$. Hotels: the lowest nightly price, e.g. $202+. Attractions: null",
+                                "example": "$$ - $$$"
+                              },
+                              "categories": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "description": "Attraction categories, restaurant cuisines, or the hotel's accommodation type",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "example": 11026
+                                    },
+                                    "name": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "Museums"
+                                    }
+                                  }
+                                },
+                                "example": [
+                                  {
+                                    "id": 11024,
+                                    "name": "Sights & Landmarks"
+                                  },
+                                  {
+                                    "id": 11026,
+                                    "name": "Museums"
+                                  }
+                                ]
+                              },
+                              "award": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "description": "Travelers' Choice award of the year (COE, BOTB)",
+                                "example": "BOTB 2026"
+                              },
+                              "website": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "http://www.louvre.fr"
+                              },
+                              "phone": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "+33 1 40 20 53 17"
+                              },
+                              "opening_hours": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "Monday 09:00-18:00",
+                                  "Tuesday Closed",
+                                  "Wednesday 09:00-21:00"
+                                ]
+                              },
+                              "address": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "properties": {
+                                  "street": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "99 Rue de Rivoli"
+                                  },
+                                  "locality": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "Paris"
+                                  },
+                                  "region": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": null
+                                  },
+                                  "country": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "France"
+                                  },
+                                  "postal_code": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "75001"
+                                  },
+                                  "full": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "99 Rue de Rivoli, 75001 Paris France"
+                                  }
+                                }
+                              },
+                              "locality": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Paris"
+                              },
+                              "thumbnail": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://media-cdn.tripadvisor.com/media/photo-s/22/4f/70/dc/cour-napoleon-et-pyramide.jpg"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cached": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "example": false
+                    },
+                    "source": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "example": "tripadvisor:graphql"
+                    },
+                    "pagination": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 750
+                        },
+                        "limit": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 50
+                        },
+                        "offset": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 0
+                        },
+                        "count": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 50
+                        },
+                        "has_more": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ],
+                          "example": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/CreditLimitReached"
+          },
+          "403": {
+            "$ref": "#/components/responses/AccountSuspended"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "502": {
+            "$ref": "#/components/responses/UpstreamFailed"
+          }
+        }
+      }
+    },
     "/restaurants": {
       "get": {
         "operationId": "restaurants",
@@ -3566,6 +4299,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -3951,6 +4704,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -4715,6 +5488,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -4957,6 +5750,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -5217,6 +6030,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -5542,6 +6375,26 @@
         "responses": {
           "200": {
             "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
@@ -5791,7 +6644,8 @@
         "type": "object",
         "required": [
           "error",
-          "message"
+          "message",
+          "retryable"
         ],
         "properties": {
           "error": {
@@ -5801,6 +6655,10 @@
           "message": {
             "type": "string",
             "description": "What went wrong, in a sentence."
+          },
+          "retryable": {
+            "type": "boolean",
+            "description": "Whether the same request may succeed later without any change. When true, wait the seconds in `Retry-After` (if sent) first."
           }
         }
       }
@@ -5815,7 +6673,8 @@
             },
             "example": {
               "error": "bad_request",
-              "message": "Missing required query parameter: q"
+              "message": "Missing required query parameter: q",
+              "retryable": false
             }
           }
         }
@@ -5829,7 +6688,8 @@
             },
             "example": {
               "error": "missing_api_key",
-              "message": "Provide an API key via the Authorization: Bearer <key> header."
+              "message": "Provide an API key via the Authorization: Bearer <key> header.",
+              "retryable": false
             }
           }
         }
@@ -5843,7 +6703,8 @@
             },
             "example": {
               "error": "credit_limit_reached",
-              "message": "You've used all 1,000 credits in your Free plan for this period. Upgrade your plan for a higher allotment."
+              "message": "You've used all 1,000 credits in your Free plan for this period. Upgrade your plan for a higher allotment.",
+              "retryable": false
             }
           }
         }
@@ -5857,13 +6718,14 @@
             },
             "example": {
               "error": "account_banned",
-              "message": "Your account is suspended."
+              "message": "Your account is suspended.",
+              "retryable": false
             }
           }
         }
       },
       "RateLimited": {
-        "description": "Too many requests for this key. Wait the number of seconds in `Retry-After`.",
+        "description": "Too many requests for this key (`rate_limited`), or too many at once for its plan (`concurrency_limited`). Wait the number of seconds in `Retry-After`.",
         "headers": {
           "Retry-After": {
             "description": "Seconds to wait before retrying.",
@@ -5879,13 +6741,22 @@
             },
             "example": {
               "error": "rate_limited",
-              "message": "Rate limit exceeded for this API key."
+              "message": "Rate limit exceeded for this API key (600 requests a minute).",
+              "retryable": true
             }
           }
         }
       },
       "UpstreamFailed": {
         "description": "The source site could not be read this time. Retrying later usually works.",
+        "headers": {
+          "Retry-After": {
+            "description": "Seconds to wait before retrying.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        },
         "content": {
           "application/json": {
             "schema": {
@@ -5893,7 +6764,8 @@
             },
             "example": {
               "error": "scrape_failed",
-              "message": "The upstream source could not be fetched"
+              "message": "The upstream source could not be fetched",
+              "retryable": true
             }
           }
         }

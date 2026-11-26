@@ -140,6 +140,18 @@ export class TripadvisorClient {
   }
 
   /**
+   * Places inside a map box (north, south, east, west): attractions, restaurants or
+   * hotels, with coordinates, rating, ranking, price level, categories, website, phone,
+   * opening hours, address and a thumbnail.
+   *
+   * Each successful request uses 1 credit for every 100 rows it returns (at least 1
+   * credit).
+   */
+  placesInArea(params) {
+    return this.request("/places-in-area", params, ["north", "south", "east", "west"]);
+  }
+
+  /**
    * Restaurants / eateries for a location (geo_id).
    *
    * Each successful request uses 1 credit for every 30 rows it returns (at least 1

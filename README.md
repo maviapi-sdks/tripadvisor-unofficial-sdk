@@ -2,7 +2,7 @@
 
 Unofficial **Tripadvisor API** client for Python, JavaScript/TypeScript, Go, PHP, Ruby, Java and C#. Trip-planning data from Tripadvisor: geo search plus attractions, restaurants and hotels by location (geo_id), with ratings, reviews, price and coordinates. Resolve a place name with /search, then list with /attractions, /restaurants, /hotels.
 
-- **16 endpoints**, each returning JSON, with one method per endpoint in every language.
+- **17 endpoints**, each returning JSON, with one method per endpoint in every language.
 - **Works with no setup.** With no key, a client uses a shared demo key (30 requests a minute and 300 a day per network).
 - **Your own key lifts the limit.** [Create a free key](https://maviapi.com/sign-up?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor): a 7-day trial with 5,000 credits, no card.
 - **Kept working.** The API is hosted by [maviapi](https://maviapi.com/apis/tripadvisor?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor), which monitors it and repairs it when the website changes.
@@ -162,6 +162,7 @@ Console.WriteLine(result);
 | [`GET /photos`](#get-photos) | Photo gallery of one place (hotel/restaurant/attraction) by detail id, with the total photo count. | 1 |
 | [`GET /photos-v2`](#get-photos-v2) | The full photo gallery of one place (hotel/restaurant/attraction) by detail id, with the total photo count: offset reaches the total, limit up to the site's own per-call maximum (100). | 1 |
 | [`GET /place`](#get-place) | Full detail for one TripAdvisor place (hotel/restaurant/attraction) by detail id: name, rating, review count, ranking, address, coordinates, phone, price level, description, photo count, image, plus amenities (hotels), cuisines (restaurants), opening hours and category. | 1 |
+| [`GET /places-in-area`](#get-places-in-area) | Places inside a map box (north, south, east, west): attractions, restaurants or hotels, with coordinates, rating, ranking, price level, categories, website, phone, opening hours, address and a thumbnail. | 1 |
 | [`GET /restaurants`](#get-restaurants) | Restaurants / eateries for a location (geo_id). | 1 |
 | [`GET /restaurants-v2`](#get-restaurants-v2) | Restaurants for a location (geo_id), 30 per page with working pagination, optional cuisine and price range filters, and weekly opening hours when available. | 1 |
 | [`GET /reviews`](#get-reviews) | Traveler reviews for one place by detail id. | 1 |
@@ -185,12 +186,12 @@ A request the API answers with an error status raises an `ApiError` (in Go, retu
 | 401 | `missing_api_key` | No API key was sent, or the key is invalid or revoked (`missing_api_key`, `invalid_api_key`). |
 | 402 | `credit_limit_reached` | The plan's credits for this period are used up. |
 | 403 | `account_banned` | The account that owns the key is suspended. |
-| 429 | `rate_limited` | Too many requests for this key. Wait the number of seconds in `Retry-After`. |
+| 429 | `rate_limited` | Too many requests for this key (`rate_limited`), or too many at once for its plan (`concurrency_limited`). Wait the number of seconds in `Retry-After`. |
 | 502 | `scrape_failed` | The source site could not be read this time. Retrying later usually works. |
 
 ## Endpoint reference
 
-Base URL: `https://api.maviapi.com/v1/sites/tripadvisor`. API version 2026-11-18. The same contract is in [`openapi.json`](openapi.json).
+Base URL: `https://api.maviapi.com/v1/sites/tripadvisor`. API version 2026-11-26. The same contract is in [`openapi.json`](openapi.json).
 
 ### `GET /attractions`
 
@@ -439,8 +440,8 @@ Methods: `hotel_offers` (Python, Ruby) · `hotelOffers` (JavaScript/TypeScript, 
 Parameters:
 
 - `geo` (string, required): TripAdvisor geo_id from /search. Example: `187147`.
-- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-12-25`.
-- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-12-27`.
+- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-12-26`.
+- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-12-28`.
 - `adults` (integer, optional): Number of adults. Example: `2`.
 - `rooms` (integer, optional): Number of rooms. Example: `1`.
 - `childrenAges` (string, optional): Comma-separated children ages, e.g. 4,9.
@@ -853,6 +854,96 @@ Parameters:
   },
   "cached": false,
   "source": "tripadvisor:detail"
+}
+```
+
+</details>
+
+### `GET /places-in-area`
+
+Places inside a map box (north, south, east, west): attractions, restaurants or hotels, with coordinates, rating, ranking, price level, categories, website, phone, opening hours, address and a thumbnail.
+
+Each successful request uses 1 credit for every 100 rows it returns (at least 1 credit).
+
+Methods: `places_in_area` (Python, Ruby) · `placesInArea` (JavaScript/TypeScript, PHP, Java) · `PlacesInArea` (Go) · `PlacesInAreaAsync` (C#)
+
+Parameters:
+
+- `north` (number, required): Northern edge of the map box, latitude in decimal degrees (-90 to 90, above south). Example: `48.87`.
+- `south` (number, required): Southern edge of the map box, latitude in decimal degrees (-90 to 90). Example: `48.85`.
+- `east` (number, required): Eastern edge of the map box, longitude in decimal degrees (-180 to 180, above west; split a box that crosses the 180th meridian). Example: `2.36`.
+- `west` (number, required): Western edge of the map box, longitude in decimal degrees (-180 to 180). Example: `2.33`.
+- `type` (string, optional): Kind of place to list. One of: `attractions`, `restaurants`, `hotels`. Example: `restaurants`.
+- `limit` (integer, optional): Places per page (1-100). Example: `50`.
+- `offset` (integer, optional): Places to skip; walk it up to pagination.total. Attractions and restaurants: the site returns at most 750 per box (data.capped), so zoom in or split the box to reach more. Example: `0`.
+- `refresh` (boolean, optional): Bypass and repopulate the cache. Example: `false`.
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "data": {
+    "box": {
+      "north": 48.87,
+      "south": 48.85,
+      "east": 2.36,
+      "west": 2.33
+    },
+    "type": "attractions",
+    "total": 750,
+    "capped": true,
+    "places": [
+      {
+        "id": "188757",
+        "name": "Louvre Museum",
+        "type": "attraction",
+        "geo_id": "187147",
+        "url": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html",
+        "coordinates": {
+          "latitude": 48.861,
+          "longitude": 2.335833
+        },
+        "rating": 4.6,
+        "review_count": 104685,
+        "ranking_position": 17,
+        "ranking_total": 12025,
+        "ranking_string": "#1 of 1,897 hotels in Paris",
+        "price_level": "$$ - $$$",
+        "categories": [
+          {
+            "id": 11026,
+            "name": "Museums"
+          }
+        ],
+        "award": "BOTB 2026",
+        "website": "http://www.louvre.fr",
+        "phone": "+33 1 40 20 53 17",
+        "opening_hours": [
+          null
+        ],
+        "address": {
+          "street": "99 Rue de Rivoli",
+          "locality": "Paris",
+          "region": null,
+          "country": "France",
+          "postal_code": "75001",
+          "full": "99 Rue de Rivoli, 75001 Paris France"
+        },
+        "locality": "Paris",
+        "thumbnail": "https://media-cdn.tripadvisor.com/media/photo-s/22/4f/70/dc/cour-napoleon-et-pyramide.jpg"
+      }
+    ]
+  },
+  "cached": false,
+  "source": "tripadvisor:graphql",
+  "pagination": {
+    "total": 750,
+    "limit": 50,
+    "offset": 0,
+    "count": 50,
+    "has_more": true
+  }
 }
 ```
 
@@ -1321,7 +1412,7 @@ Parameters:
 - [maviapi MCP server](https://maviapi.com/docs#mcp): the same API as tools for Claude, Cursor and other AI agents.
 - [All maviapi APIs](https://maviapi.com/apis?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor). Need a website that is not there? [Ask for it](https://maviapi.com/?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor) and get an API for it.
 
-Other unofficial SDKs: [Airbnb](https://github.com/maviapi-sdks/airbnb-unofficial-sdk) · [Booking.com](https://github.com/maviapi-sdks/booking-unofficial-sdk) · [GetYourGuide](https://github.com/maviapi-sdks/getyourguide-unofficial-sdk) · [Kiwi.com](https://github.com/maviapi-sdks/kiwi-unofficial-sdk) · [MarineTraffic](https://github.com/maviapi-sdks/marinetraffic-unofficial-sdk) · [Speedtest](https://github.com/maviapi-sdks/speedtest-unofficial-sdk) · [Trainline](https://github.com/maviapi-sdks/trainline-unofficial-sdk) · [Trendyol](https://github.com/maviapi-sdks/trendyol-unofficial-sdk) · [Yemeksepeti](https://github.com/maviapi-sdks/yemeksepeti-unofficial-sdk)
+Other unofficial SDKs: [Airbnb](https://github.com/maviapi-sdks/airbnb-unofficial-sdk) · [Booking.com](https://github.com/maviapi-sdks/booking-unofficial-sdk) · [GetYourGuide](https://github.com/maviapi-sdks/getyourguide-unofficial-sdk) · [Google Search](https://github.com/maviapi-sdks/google-search-unofficial-sdk) · [Kiwi.com](https://github.com/maviapi-sdks/kiwi-unofficial-sdk) · [MarineTraffic](https://github.com/maviapi-sdks/marinetraffic-unofficial-sdk) · [Speedtest](https://github.com/maviapi-sdks/speedtest-unofficial-sdk) · [Trainline](https://github.com/maviapi-sdks/trainline-unofficial-sdk) · [Trendyol](https://github.com/maviapi-sdks/trendyol-unofficial-sdk) · [Yemeksepeti](https://github.com/maviapi-sdks/yemeksepeti-unofficial-sdk)
 
 ## License
 
