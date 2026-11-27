@@ -140,6 +140,26 @@ export class TripadvisorClient {
   }
 
   /**
+   * Full detail for up to 50 places in one call: one record per id in the order given,
+   * with name, coordinates, address, website, phone, opening hours, categories, rating,
+   * review count, description and photos. An id that fails gives an error row instead of
+   * failing the call.
+   */
+  placesBatch(params) {
+    return this.request("/places-batch", params, ["ids"]);
+  }
+
+  /**
+   * Same as /places-batch, plus where each place's coordinates came from:
+   * coordinates.source (place_page, map_pin or city_centre) and coordinates.precise
+   * (true only for the place page or map pin). Tours and places the site never pinned
+   * get their city centre, marked not precise.
+   */
+  placesBatchV2(params) {
+    return this.request("/places-batch-v2", params, ["ids"]);
+  }
+
+  /**
    * Places inside a map box (north, south, east, west): attractions, restaurants or
    * hotels, with coordinates, rating, ranking, price level, categories, website, phone,
    * opening hours, address and a thumbnail.

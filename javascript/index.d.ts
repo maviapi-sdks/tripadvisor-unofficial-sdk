@@ -291,6 +291,54 @@ export interface PlaceParams {
   "refresh"?: boolean;
 }
 
+export interface PlacesBatchParams {
+  /**
+   * Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or
+   * attraction from any list endpoint). Records come back in this order, one per id
+   */
+  "ids": string;
+  /**
+   * Photos per place (0 to 20; 0 leaves them out)
+   */
+  "photos"?: number;
+  /**
+   * Records per page (1-50)
+   */
+  "limit"?: number;
+  /**
+   * Records to skip
+   */
+  "offset"?: number;
+  /**
+   * Bypass and repopulate the cache
+   */
+  "refresh"?: boolean;
+}
+
+export interface PlacesBatchV2Params {
+  /**
+   * Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or
+   * attraction from any list endpoint). Records come back in this order, one per id
+   */
+  "ids": string;
+  /**
+   * Photos per place (0 to 20; 0 leaves them out)
+   */
+  "photos"?: number;
+  /**
+   * Records per page (1-50)
+   */
+  "limit"?: number;
+  /**
+   * Records to skip
+   */
+  "offset"?: number;
+  /**
+   * Bypass and repopulate the cache
+   */
+  "refresh"?: boolean;
+}
+
 export interface PlacesInAreaParams {
   /**
    * Northern edge of the map box, latitude in decimal degrees (-90 to 90, above south)
@@ -700,6 +748,38 @@ export declare class TripadvisorClient {
    *   refresh (boolean): Bypass and repopulate the cache
    */
   place(params: PlaceParams): Promise<Record<string, any>>;
+  /**
+   * Full detail for up to 50 places in one call: one record per id in the order given,
+   * with name, coordinates, address, website, phone, opening hours, categories, rating,
+   * review count, description and photos. An id that fails gives an error row instead of
+   * failing the call.
+   *
+   * Parameters:
+   *   ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+   *     a hotel, restaurant or attraction from any list endpoint). Records come back in
+   *     this order, one per id
+   *   photos (integer): Photos per place (0 to 20; 0 leaves them out)
+   *   limit (integer): Records per page (1-50)
+   *   offset (integer): Records to skip
+   *   refresh (boolean): Bypass and repopulate the cache
+   */
+  placesBatch(params: PlacesBatchParams): Promise<Record<string, any>>;
+  /**
+   * Same as /places-batch, plus where each place's coordinates came from:
+   * coordinates.source (place_page, map_pin or city_centre) and coordinates.precise
+   * (true only for the place page or map pin). Tours and places the site never pinned
+   * get their city centre, marked not precise.
+   *
+   * Parameters:
+   *   ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+   *     a hotel, restaurant or attraction from any list endpoint). Records come back in
+   *     this order, one per id
+   *   photos (integer): Photos per place (0 to 20; 0 leaves them out)
+   *   limit (integer): Records per page (1-50)
+   *   offset (integer): Records to skip
+   *   refresh (boolean): Bypass and repopulate the cache
+   */
+  placesBatchV2(params: PlacesBatchV2Params): Promise<Record<string, any>>;
   /**
    * Places inside a map box (north, south, east, west): attractions, restaurants or
    * hotels, with coordinates, rating, ranking, price level, categories, website, phone,

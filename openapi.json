@@ -2,8 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Tripadvisor API",
-    "version": "2026-11-26",
-    "description": "Trip-planning data from Tripadvisor: geo search plus attractions, restaurants and hotels by location (geo_id), with ratings, reviews, price and coordinates. Resolve a place name with /search, then list with /attractions, /restaurants, /hotels.\n\nEvery request needs an API key in the `Authorization: Bearer <key>` header. Create one at https://maviapi.com/dashboard/keys. A successful request uses one credit, unless its operation says more (`x-credits`). That price covers 200 rows (or the operation's `x-credits-rows`); a request that returns more pays it again for each further page of that many rows. The `x-maviapi-credits` response header says what a request cost.\n\nEndpoint reference with live examples: https://maviapi.com/apis/tripadvisor",
+    "version": "2026-11-27",
+    "description": "Trip-planning data from Tripadvisor: geo search plus attractions, restaurants and hotels by location (geo_id), with ratings, reviews, price and coordinates. Resolve a place name with /search, then list with /attractions, /restaurants, /hotels.\n\nEvery request needs an API key in the `Authorization: Bearer <key>` header. Create one at https://maviapi.com/dashboard/keys. A successful request uses one credit, unless its operation says more (`x-credits`). That price covers 200 rows (or the operation's `x-credits-rows`); a request that returns more pays it again for each further page of that many rows. The `x-maviapi-credits` response header says what a request cost. A query param an operation does not take is ignored and named in the `x-maviapi-unknown-params` response header; send the `x-maviapi-strict: 1` request header to have such a request refused with a free `400 unknown_param` instead.\n\nEndpoint reference with live examples: https://maviapi.com/apis/tripadvisor",
     "termsOfService": "https://maviapi.com/terms"
   },
   "externalDocs": {
@@ -104,6 +104,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -480,6 +486,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -976,6 +988,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -1367,7 +1385,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-12-26"
+            "example": "2026-12-27"
           },
           {
             "name": "checkOutDate",
@@ -1377,7 +1395,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "2026-12-28"
+            "example": "2026-12-29"
           },
           {
             "name": "adults",
@@ -1443,6 +1461,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -1811,6 +1835,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2157,6 +2187,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -2578,6 +2614,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -2880,6 +2922,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3154,6 +3202,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -3426,6 +3480,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -3700,6 +3760,1189 @@
         }
       }
     },
+    "/places-batch": {
+      "get": {
+        "operationId": "placesBatch",
+        "summary": "Places in one call",
+        "description": "Full detail for up to 50 places in one call: one record per id in the order given, with name, coordinates, address, website, phone, opening hours, categories, rating, review count, description and photos. An id that fails gives an error row instead of failing the call.",
+        "x-credits": 1,
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "description": "Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or attraction from any list endpoint). Records come back in this order, one per id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "188757,250927,294555"
+          },
+          {
+            "name": "photos",
+            "in": "query",
+            "required": false,
+            "description": "Photos per place (0 to 20; 0 leaves them out)",
+            "schema": {
+              "type": "integer",
+              "default": 5,
+              "minimum": 0,
+              "maximum": 20
+            },
+            "example": 2
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Records per page (1-50)",
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "minimum": 1,
+              "maximum": 50
+            },
+            "example": 50
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Records to skip",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "description": "Bypass and repopulate the cache",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "requested": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3,
+                          "description": "Ids given"
+                        },
+                        "found": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3,
+                          "description": "Ids that returned a place"
+                        },
+                        "places": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "object",
+                            "description": "A place record, or {id, error} when that id failed",
+                            "properties": {
+                              "id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "188757",
+                                "description": "The id as given"
+                              },
+                              "error": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "description": "Only on a failed id, instead of the place fields",
+                                "properties": {
+                                  "code": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "enum": [
+                                      "invalid_id",
+                                      "not_found",
+                                      "not_a_place",
+                                      "upstream_error",
+                                      null
+                                    ],
+                                    "example": "not_found"
+                                  },
+                                  "message": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "No TripAdvisor place with id 999999999"
+                                  }
+                                }
+                              },
+                              "type": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "attraction",
+                                "description": "hotel, restaurant or attraction"
+                              },
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Louvre Museum"
+                              },
+                              "geo_id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "187147",
+                                "description": "The city or region the place belongs to"
+                              },
+                              "rating": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ],
+                                "example": 4.6
+                              },
+                              "review_count": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 104685
+                              },
+                              "ranking_position": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 17,
+                                "description": "Popularity rank among its kind in its city"
+                              },
+                              "ranking_denominator": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 12031
+                              },
+                              "ranking_category": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": null
+                              },
+                              "price_range": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": null
+                              },
+                              "description": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "As one of the largest, oldest and most visited museums in the world..."
+                              },
+                              "photo_count": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 87371
+                              },
+                              "phone": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "+33 1 40 20 53 17"
+                              },
+                              "website": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "http://www.louvre.fr"
+                              },
+                              "address": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "properties": {
+                                  "street": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "99 Rue de Rivoli"
+                                  },
+                                  "locality": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "Paris"
+                                  },
+                                  "region": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": null
+                                  },
+                                  "country": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "France"
+                                  },
+                                  "postal_code": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "75001"
+                                  }
+                                }
+                              },
+                              "coordinates": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "properties": {
+                                  "latitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 48.861
+                                  },
+                                  "longitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 2.33583
+                                  }
+                                }
+                              },
+                              "image": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1"
+                              },
+                              "url": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html"
+                              },
+                              "categories": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "Sights & Landmarks",
+                                  "Museums"
+                                ],
+                                "description": "Attraction categories, cuisines, or the hotel's accommodation type"
+                              },
+                              "cuisines": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": null
+                              },
+                              "amenities": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": null,
+                                "description": "Always null here (use /place for hotel amenities)"
+                              },
+                              "opening_hours": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "Monday 09:00-18:00",
+                                  "Tuesday Closed"
+                                ]
+                              },
+                              "category": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Sights & Landmarks"
+                              },
+                              "source": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "detail"
+                              },
+                              "photos": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "575631580"
+                                    },
+                                    "url": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "https://media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg",
+                                      "description": "Full-size image"
+                                    },
+                                    "max_width": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "example": 1200
+                                    },
+                                    "max_height": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "example": 801
+                                    },
+                                    "caption": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "Cour Napoléon et pyramide"
+                                    },
+                                    "attribution": {
+                                      "type": [
+                                        "object",
+                                        "null"
+                                      ],
+                                      "properties": {
+                                        "author": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "Musée du Louvre",
+                                          "description": "Who posted the photo"
+                                        },
+                                        "author_url": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "https://www.tripadvisor.com/Profile/museelouvre"
+                                        },
+                                        "source": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "OWNER",
+                                          "description": "Who supplied it: TRAVELER, OWNER, MANAGEMENT, EXPERT, ..."
+                                        }
+                                      }
+                                    },
+                                    "uploaded_at": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "2022-03-04T15:38:46.404Z",
+                                      "description": "Upload time, UTC"
+                                    }
+                                  }
+                                },
+                                "description": "The place's first photos (see the photos param)"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cached": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "example": false
+                    },
+                    "source": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "example": "tripadvisor:places-batch"
+                    },
+                    "pagination": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3
+                        },
+                        "limit": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 50
+                        },
+                        "offset": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 0
+                        },
+                        "count": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3
+                        },
+                        "has_more": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ],
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/CreditLimitReached"
+          },
+          "403": {
+            "$ref": "#/components/responses/AccountSuspended"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "502": {
+            "$ref": "#/components/responses/UpstreamFailed"
+          }
+        }
+      }
+    },
+    "/places-batch-v2": {
+      "get": {
+        "operationId": "placesBatchV2",
+        "summary": "Places in one call, with coordinate source",
+        "description": "Same as /places-batch, plus where each place's coordinates came from: coordinates.source (place_page, map_pin or city_centre) and coordinates.precise (true only for the place page or map pin). Tours and places the site never pinned get their city centre, marked not precise.",
+        "x-credits": 1,
+        "parameters": [
+          {
+            "name": "ids",
+            "in": "query",
+            "required": true,
+            "description": "Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or attraction from any list endpoint). Records come back in this order, one per id",
+            "schema": {
+              "type": "string"
+            },
+            "example": "188757,250927,11447589"
+          },
+          {
+            "name": "photos",
+            "in": "query",
+            "required": false,
+            "description": "Photos per place (0 to 20; 0 leaves them out)",
+            "schema": {
+              "type": "integer",
+              "default": 5,
+              "minimum": 0,
+              "maximum": 20
+            },
+            "example": 2
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "Records per page (1-50)",
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "minimum": 1,
+              "maximum": 50
+            },
+            "example": 50
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "description": "Records to skip",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "example": 0
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "description": "Bypass and repopulate the cache",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "example": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data, as JSON.",
+            "headers": {
+              "RateLimit-Limit": {
+                "description": "Requests the key may make in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Remaining": {
+                "description": "Requests left in the current window.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "RateLimit-Reset": {
+                "description": "Seconds until the window starts again.",
+                "schema": {
+                  "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "requested": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3,
+                          "description": "Ids given"
+                        },
+                        "found": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3,
+                          "description": "Ids that returned a place"
+                        },
+                        "places": {
+                          "type": [
+                            "array",
+                            "null"
+                          ],
+                          "items": {
+                            "type": "object",
+                            "description": "A place record, or {id, error} when that id failed",
+                            "properties": {
+                              "id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "188757",
+                                "description": "The id as given"
+                              },
+                              "error": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "description": "Only on a failed id, instead of the place fields",
+                                "properties": {
+                                  "code": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "enum": [
+                                      "invalid_id",
+                                      "not_found",
+                                      "not_a_place",
+                                      "upstream_error",
+                                      null
+                                    ],
+                                    "example": "not_found"
+                                  },
+                                  "message": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "No TripAdvisor place with id 999999999"
+                                  }
+                                }
+                              },
+                              "type": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "attraction",
+                                "description": "hotel, restaurant or attraction"
+                              },
+                              "name": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Louvre Museum"
+                              },
+                              "geo_id": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "187147",
+                                "description": "The city or region the place belongs to"
+                              },
+                              "rating": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ],
+                                "example": 4.6
+                              },
+                              "review_count": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 104685
+                              },
+                              "ranking_position": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 17,
+                                "description": "Popularity rank among its kind in its city"
+                              },
+                              "ranking_denominator": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 12031
+                              },
+                              "ranking_category": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": null
+                              },
+                              "price_range": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": null
+                              },
+                              "description": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "As one of the largest, oldest and most visited museums in the world..."
+                              },
+                              "photo_count": {
+                                "type": [
+                                  "integer",
+                                  "null"
+                                ],
+                                "example": 87371
+                              },
+                              "phone": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "+33 1 40 20 53 17"
+                              },
+                              "website": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "http://www.louvre.fr"
+                              },
+                              "address": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "properties": {
+                                  "street": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "99 Rue de Rivoli"
+                                  },
+                                  "locality": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "Paris"
+                                  },
+                                  "region": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": null
+                                  },
+                                  "country": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "France"
+                                  },
+                                  "postal_code": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "example": "75001"
+                                  }
+                                }
+                              },
+                              "coordinates": {
+                                "type": [
+                                  "object",
+                                  "null"
+                                ],
+                                "description": "Where the place is. Null only when the site has no position for the place or its city",
+                                "properties": {
+                                  "latitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 48.861
+                                  },
+                                  "longitude": {
+                                    "type": [
+                                      "number",
+                                      "null"
+                                    ],
+                                    "example": 2.335833
+                                  },
+                                  "source": {
+                                    "type": [
+                                      "string",
+                                      "null"
+                                    ],
+                                    "enum": [
+                                      "place_page",
+                                      "map_pin",
+                                      "city_centre",
+                                      null
+                                    ],
+                                    "example": "place_page",
+                                    "description": "place_page: the place's own page; map_pin: the pin on the site's map; city_centre: the centre of the city the place belongs to (the place has no position of its own, e.g. a tour)"
+                                  },
+                                  "precise": {
+                                    "type": [
+                                      "boolean",
+                                      "null"
+                                    ],
+                                    "example": true,
+                                    "description": "True only when the place page or map pin gave the position; false for a city centre fallback"
+                                  }
+                                }
+                              },
+                              "image": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1"
+                              },
+                              "url": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html"
+                              },
+                              "categories": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "Sights & Landmarks",
+                                  "Museums"
+                                ],
+                                "description": "Attraction categories, cuisines, or the hotel's accommodation type"
+                              },
+                              "cuisines": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": null
+                              },
+                              "amenities": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": null,
+                                "description": "Always null here (use /place for hotel amenities)"
+                              },
+                              "opening_hours": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "string"
+                                },
+                                "example": [
+                                  "Monday 09:00-18:00",
+                                  "Tuesday Closed"
+                                ]
+                              },
+                              "category": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "Sights & Landmarks"
+                              },
+                              "source": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ],
+                                "example": "detail"
+                              },
+                              "photos": {
+                                "type": [
+                                  "array",
+                                  "null"
+                                ],
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "575631580"
+                                    },
+                                    "url": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "https://media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg",
+                                      "description": "Full-size image"
+                                    },
+                                    "max_width": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "example": 1200
+                                    },
+                                    "max_height": {
+                                      "type": [
+                                        "integer",
+                                        "null"
+                                      ],
+                                      "example": 801
+                                    },
+                                    "caption": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "Cour Napoléon et pyramide"
+                                    },
+                                    "attribution": {
+                                      "type": [
+                                        "object",
+                                        "null"
+                                      ],
+                                      "properties": {
+                                        "author": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "Musée du Louvre",
+                                          "description": "Who posted the photo"
+                                        },
+                                        "author_url": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "https://www.tripadvisor.com/Profile/museelouvre"
+                                        },
+                                        "source": {
+                                          "type": [
+                                            "string",
+                                            "null"
+                                          ],
+                                          "example": "OWNER",
+                                          "description": "Who supplied it: TRAVELER, OWNER, MANAGEMENT, EXPERT, ..."
+                                        }
+                                      }
+                                    },
+                                    "uploaded_at": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ],
+                                      "example": "2022-03-04T15:38:46.404Z",
+                                      "description": "Upload time, UTC"
+                                    }
+                                  }
+                                },
+                                "description": "The place's first photos (see the photos param)"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cached": {
+                      "type": [
+                        "boolean",
+                        "null"
+                      ],
+                      "example": false
+                    },
+                    "source": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "example": "tripadvisor:places-batch"
+                    },
+                    "pagination": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "properties": {
+                        "total": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3
+                        },
+                        "limit": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 50
+                        },
+                        "offset": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 0
+                        },
+                        "count": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ],
+                          "example": 3
+                        },
+                        "has_more": {
+                          "type": [
+                            "boolean",
+                            "null"
+                          ],
+                          "example": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "402": {
+            "$ref": "#/components/responses/CreditLimitReached"
+          },
+          "403": {
+            "$ref": "#/components/responses/AccountSuspended"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "502": {
+            "$ref": "#/components/responses/UpstreamFailed"
+          }
+        }
+      }
+    },
     "/places-in-area": {
       "get": {
         "operationId": "placesInArea",
@@ -3821,6 +5064,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -4317,6 +5566,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -4721,6 +5976,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -5506,6 +6767,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -5767,6 +7034,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -6047,6 +7320,12 @@
                 "description": "Seconds until the window starts again.",
                 "schema": {
                   "type": "integer"
+                }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
                 }
               }
             },
@@ -6393,6 +7672,12 @@
                 "schema": {
                   "type": "integer"
                 }
+              },
+              "x-maviapi-unknown-params": {
+                "description": "Query params this endpoint does not take, comma separated; they were ignored. Send `x-maviapi-strict: 1` to get a free `400 unknown_param` instead.",
+                "schema": {
+                  "type": "string"
+                }
               }
             },
             "content": {
@@ -6665,7 +7950,7 @@
     },
     "responses": {
       "BadRequest": {
-        "description": "A parameter is missing or cannot be used.",
+        "description": "A parameter is missing or cannot be used (`bad_request`), or, with the `x-maviapi-strict: 1` request header, a query param the operation does not take was sent (`unknown_param`, with the names in `params`).",
         "content": {
           "application/json": {
             "schema": {

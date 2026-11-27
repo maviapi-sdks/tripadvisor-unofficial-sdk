@@ -2,7 +2,7 @@
 
 Unofficial **Tripadvisor API** client for Python, JavaScript/TypeScript, Go, PHP, Ruby, Java and C#. Trip-planning data from Tripadvisor: geo search plus attractions, restaurants and hotels by location (geo_id), with ratings, reviews, price and coordinates. Resolve a place name with /search, then list with /attractions, /restaurants, /hotels.
 
-- **17 endpoints**, each returning JSON, with one method per endpoint in every language.
+- **19 endpoints**, each returning JSON, with one method per endpoint in every language.
 - **Works with no setup.** With no key, a client uses a shared demo key (30 requests a minute and 300 a day per network).
 - **Your own key lifts the limit.** [Create a free key](https://maviapi.com/sign-up?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor): a 7-day trial with 5,000 credits, no card.
 - **Kept working.** The API is hosted by [maviapi](https://maviapi.com/apis/tripadvisor?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor), which monitors it and repairs it when the website changes.
@@ -162,6 +162,8 @@ Console.WriteLine(result);
 | [`GET /photos`](#get-photos) | Photo gallery of one place (hotel/restaurant/attraction) by detail id, with the total photo count. | 1 |
 | [`GET /photos-v2`](#get-photos-v2) | The full photo gallery of one place (hotel/restaurant/attraction) by detail id, with the total photo count: offset reaches the total, limit up to the site's own per-call maximum (100). | 1 |
 | [`GET /place`](#get-place) | Full detail for one TripAdvisor place (hotel/restaurant/attraction) by detail id: name, rating, review count, ranking, address, coordinates, phone, price level, description, photo count, image, plus amenities (hotels), cuisines (restaurants), opening hours and category. | 1 |
+| [`GET /places-batch`](#get-places-batch) | Full detail for up to 50 places in one call: one record per id in the order given, with name, coordinates, address, website, phone, opening hours, categories, rating, review count, description and photos. | 1 |
+| [`GET /places-batch-v2`](#get-places-batch-v2) | Same as /places-batch, plus where each place's coordinates came from: coordinates.source (place_page, map_pin or city_centre) and coordinates.precise (true only for the place page or map pin). | 1 |
 | [`GET /places-in-area`](#get-places-in-area) | Places inside a map box (north, south, east, west): attractions, restaurants or hotels, with coordinates, rating, ranking, price level, categories, website, phone, opening hours, address and a thumbnail. | 1 |
 | [`GET /restaurants`](#get-restaurants) | Restaurants / eateries for a location (geo_id). | 1 |
 | [`GET /restaurants-v2`](#get-restaurants-v2) | Restaurants for a location (geo_id), 30 per page with working pagination, optional cuisine and price range filters, and weekly opening hours when available. | 1 |
@@ -182,7 +184,7 @@ A request the API answers with an error status raises an `ApiError` (in Go, retu
 
 | Status | Code | Meaning |
 |---|---|---|
-| 400 | `bad_request` | A parameter is missing or cannot be used. |
+| 400 | `bad_request` | A parameter is missing or cannot be used (`bad_request`), or, with the `x-maviapi-strict: 1` request header, a query param the operation does not take was sent (`unknown_param`, with the names in `params`). |
 | 401 | `missing_api_key` | No API key was sent, or the key is invalid or revoked (`missing_api_key`, `invalid_api_key`). |
 | 402 | `credit_limit_reached` | The plan's credits for this period are used up. |
 | 403 | `account_banned` | The account that owns the key is suspended. |
@@ -191,7 +193,7 @@ A request the API answers with an error status raises an `ApiError` (in Go, retu
 
 ## Endpoint reference
 
-Base URL: `https://api.maviapi.com/v1/sites/tripadvisor`. API version 2026-11-26. The same contract is in [`openapi.json`](openapi.json).
+Base URL: `https://api.maviapi.com/v1/sites/tripadvisor`. API version 2026-11-27. The same contract is in [`openapi.json`](openapi.json).
 
 ### `GET /attractions`
 
@@ -440,8 +442,8 @@ Methods: `hotel_offers` (Python, Ruby) · `hotelOffers` (JavaScript/TypeScript, 
 Parameters:
 
 - `geo` (string, required): TripAdvisor geo_id from /search. Example: `187147`.
-- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-12-26`.
-- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-12-28`.
+- `checkInDate` (string, required): Check-in date (YYYY-MM-DD). Example: `2026-12-27`.
+- `checkOutDate` (string, required): Check-out date (YYYY-MM-DD). Example: `2026-12-29`.
 - `adults` (integer, optional): Number of adults. Example: `2`.
 - `rooms` (integer, optional): Number of rooms. Example: `1`.
 - `childrenAges` (string, optional): Comma-separated children ages, e.g. 4,9.
@@ -854,6 +856,210 @@ Parameters:
   },
   "cached": false,
   "source": "tripadvisor:detail"
+}
+```
+
+</details>
+
+### `GET /places-batch`
+
+Full detail for up to 50 places in one call: one record per id in the order given, with name, coordinates, address, website, phone, opening hours, categories, rating, review count, description and photos. An id that fails gives an error row instead of failing the call.
+
+Methods: `places_batch` (Python, Ruby) · `placesBatch` (JavaScript/TypeScript, PHP, Java) · `PlacesBatch` (Go) · `PlacesBatchAsync` (C#)
+
+Parameters:
+
+- `ids` (string, required): Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or attraction from any list endpoint). Records come back in this order, one per id. Example: `188757,250927,294555`.
+- `photos` (integer, optional): Photos per place (0 to 20; 0 leaves them out). Example: `2`.
+- `limit` (integer, optional): Records per page (1-50). Example: `50`.
+- `offset` (integer, optional): Records to skip. Example: `0`.
+- `refresh` (boolean, optional): Bypass and repopulate the cache. Example: `false`.
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "data": {
+    "requested": 3,
+    "found": 3,
+    "places": [
+      {
+        "id": "188757",
+        "error": {
+          "code": "not_found",
+          "message": "No TripAdvisor place with id 999999999"
+        },
+        "type": "attraction",
+        "name": "Louvre Museum",
+        "geo_id": "187147",
+        "rating": 4.6,
+        "review_count": 104685,
+        "ranking_position": 17,
+        "ranking_denominator": 12031,
+        "ranking_category": null,
+        "price_range": null,
+        "description": "As one of the largest, oldest and most visited museums in the world...",
+        "photo_count": 87371,
+        "phone": "+33 1 40 20 53 17",
+        "website": "http://www.louvre.fr",
+        "address": {
+          "street": "99 Rue de Rivoli",
+          "locality": "Paris",
+          "region": null,
+          "country": "France",
+          "postal_code": "75001"
+        },
+        "coordinates": {
+          "latitude": 48.861,
+          "longitude": 2.33583
+        },
+        "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1",
+        "url": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html",
+        "categories": [
+          null
+        ],
+        "cuisines": [
+          null
+        ],
+        "amenities": [
+          null
+        ],
+        "opening_hours": [
+          null
+        ],
+        "category": "Sights & Landmarks",
+        "source": "detail",
+        "photos": [
+          {
+            "id": "575631580",
+            "url": "https://media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg",
+            "max_width": 1200,
+            "max_height": 801,
+            "caption": "Cour Napoléon et pyramide",
+            "attribution": {
+              "author": "Musée du Louvre",
+              "author_url": "https://www.tripadvisor.com/Profile/museelouvre",
+              "source": "OWNER"
+            },
+            "uploaded_at": "2022-03-04T15:38:46.404Z"
+          }
+        ]
+      }
+    ]
+  },
+  "cached": false,
+  "source": "tripadvisor:places-batch",
+  "pagination": {
+    "total": 3,
+    "limit": 50,
+    "offset": 0,
+    "count": 3,
+    "has_more": false
+  }
+}
+```
+
+</details>
+
+### `GET /places-batch-v2`
+
+Same as /places-batch, plus where each place's coordinates came from: coordinates.source (place_page, map_pin or city_centre) and coordinates.precise (true only for the place page or map pin). Tours and places the site never pinned get their city centre, marked not precise.
+
+Methods: `places_batch_v2` (Python, Ruby) · `placesBatchV2` (JavaScript/TypeScript, PHP, Java) · `PlacesBatchV2` (Go) · `PlacesBatchV2Async` (C#)
+
+Parameters:
+
+- `ids` (string, required): Comma list of up to 50 TripAdvisor place ids (the id of a hotel, restaurant or attraction from any list endpoint). Records come back in this order, one per id. Example: `188757,250927,11447589`.
+- `photos` (integer, optional): Photos per place (0 to 20; 0 leaves them out). Example: `2`.
+- `limit` (integer, optional): Records per page (1-50). Example: `50`.
+- `offset` (integer, optional): Records to skip. Example: `0`.
+- `refresh` (boolean, optional): Bypass and repopulate the cache. Example: `false`.
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "data": {
+    "requested": 3,
+    "found": 3,
+    "places": [
+      {
+        "id": "188757",
+        "error": {
+          "code": "not_found",
+          "message": "No TripAdvisor place with id 999999999"
+        },
+        "type": "attraction",
+        "name": "Louvre Museum",
+        "geo_id": "187147",
+        "rating": 4.6,
+        "review_count": 104685,
+        "ranking_position": 17,
+        "ranking_denominator": 12031,
+        "ranking_category": null,
+        "price_range": null,
+        "description": "As one of the largest, oldest and most visited museums in the world...",
+        "photo_count": 87371,
+        "phone": "+33 1 40 20 53 17",
+        "website": "http://www.louvre.fr",
+        "address": {
+          "street": "99 Rue de Rivoli",
+          "locality": "Paris",
+          "region": null,
+          "country": "France",
+          "postal_code": "75001"
+        },
+        "coordinates": {
+          "latitude": 48.861,
+          "longitude": 2.335833,
+          "source": "place_page",
+          "precise": true
+        },
+        "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg?w=1200&h=-1&s=1",
+        "url": "https://www.tripadvisor.com/Attraction_Review-g187147-d188757-Reviews-Louvre_Museum-Paris_Ile_de_France.html",
+        "categories": [
+          null
+        ],
+        "cuisines": [
+          null
+        ],
+        "amenities": [
+          null
+        ],
+        "opening_hours": [
+          null
+        ],
+        "category": "Sights & Landmarks",
+        "source": "detail",
+        "photos": [
+          {
+            "id": "575631580",
+            "url": "https://media-cdn.tripadvisor.com/media/photo-o/22/4f/70/dc/cour-napoleon-et-pyramide.jpg",
+            "max_width": 1200,
+            "max_height": 801,
+            "caption": "Cour Napoléon et pyramide",
+            "attribution": {
+              "author": "Musée du Louvre",
+              "author_url": "https://www.tripadvisor.com/Profile/museelouvre",
+              "source": "OWNER"
+            },
+            "uploaded_at": "2022-03-04T15:38:46.404Z"
+          }
+        ]
+      }
+    ]
+  },
+  "cached": false,
+  "source": "tripadvisor:places-batch",
+  "pagination": {
+    "total": 3,
+    "limit": 50,
+    "offset": 0,
+    "count": 3,
+    "has_more": false
+  }
 }
 ```
 
@@ -1412,7 +1618,7 @@ Parameters:
 - [maviapi MCP server](https://maviapi.com/docs#mcp): the same API as tools for Claude, Cursor and other AI agents.
 - [All maviapi APIs](https://maviapi.com/apis?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor). Need a website that is not there? [Ask for it](https://maviapi.com/?utm_source=github&utm_medium=readme&utm_campaign=sdk-tripadvisor) and get an API for it.
 
-Other unofficial SDKs: [Airbnb](https://github.com/maviapi-sdks/airbnb-unofficial-sdk) · [Booking.com](https://github.com/maviapi-sdks/booking-unofficial-sdk) · [GetYourGuide](https://github.com/maviapi-sdks/getyourguide-unofficial-sdk) · [Google Search](https://github.com/maviapi-sdks/google-search-unofficial-sdk) · [Kiwi.com](https://github.com/maviapi-sdks/kiwi-unofficial-sdk) · [MarineTraffic](https://github.com/maviapi-sdks/marinetraffic-unofficial-sdk) · [Speedtest](https://github.com/maviapi-sdks/speedtest-unofficial-sdk) · [Trainline](https://github.com/maviapi-sdks/trainline-unofficial-sdk) · [Trendyol](https://github.com/maviapi-sdks/trendyol-unofficial-sdk) · [Yemeksepeti](https://github.com/maviapi-sdks/yemeksepeti-unofficial-sdk)
+Other unofficial SDKs: [Airbnb](https://github.com/maviapi-sdks/airbnb-unofficial-sdk) · [Booking.com](https://github.com/maviapi-sdks/booking-unofficial-sdk) · [FlightList](https://github.com/maviapi-sdks/flightlist-unofficial-sdk) · [GetYourGuide](https://github.com/maviapi-sdks/getyourguide-unofficial-sdk) · [Google Search](https://github.com/maviapi-sdks/google-search-unofficial-sdk) · [Kiwi.com](https://github.com/maviapi-sdks/kiwi-unofficial-sdk) · [MarineTraffic](https://github.com/maviapi-sdks/marinetraffic-unofficial-sdk) · [Speedtest](https://github.com/maviapi-sdks/speedtest-unofficial-sdk) · [Trainline](https://github.com/maviapi-sdks/trainline-unofficial-sdk) · [Trendyol](https://github.com/maviapi-sdks/trendyol-unofficial-sdk) · [Yemeksepeti](https://github.com/maviapi-sdks/yemeksepeti-unofficial-sdk)
 
 ## License
 

@@ -253,6 +253,42 @@ class TripadvisorClient:
         """
         return self._get("/place", {"id": id, "geo": geo, "type": type, "refresh": refresh})
 
+    def places_batch(self, *, ids: str, photos: Optional[int] = None, limit: Optional[int] = None, offset: Optional[int] = None, refresh: Optional[bool] = None) -> Dict[str, Any]:
+        """
+        Full detail for up to 50 places in one call: one record per id in the order given,
+        with name, coordinates, address, website, phone, opening hours, categories, rating,
+        review count, description and photos. An id that fails gives an error row instead of
+        failing the call.
+
+        Parameters:
+          ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+            a hotel, restaurant or attraction from any list endpoint). Records come back in
+            this order, one per id
+          photos (integer): Photos per place (0 to 20; 0 leaves them out)
+          limit (integer): Records per page (1-50)
+          offset (integer): Records to skip
+          refresh (boolean): Bypass and repopulate the cache
+        """
+        return self._get("/places-batch", {"ids": ids, "photos": photos, "limit": limit, "offset": offset, "refresh": refresh})
+
+    def places_batch_v2(self, *, ids: str, photos: Optional[int] = None, limit: Optional[int] = None, offset: Optional[int] = None, refresh: Optional[bool] = None) -> Dict[str, Any]:
+        """
+        Same as /places-batch, plus where each place's coordinates came from:
+        coordinates.source (place_page, map_pin or city_centre) and coordinates.precise
+        (true only for the place page or map pin). Tours and places the site never pinned
+        get their city centre, marked not precise.
+
+        Parameters:
+          ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+            a hotel, restaurant or attraction from any list endpoint). Records come back in
+            this order, one per id
+          photos (integer): Photos per place (0 to 20; 0 leaves them out)
+          limit (integer): Records per page (1-50)
+          offset (integer): Records to skip
+          refresh (boolean): Bypass and repopulate the cache
+        """
+        return self._get("/places-batch-v2", {"ids": ids, "photos": photos, "limit": limit, "offset": offset, "refresh": refresh})
+
     def places_in_area(self, *, north: float, south: float, east: float, west: float, type: Optional[str] = None, limit: Optional[int] = None, offset: Optional[int] = None, refresh: Optional[bool] = None) -> Dict[str, Any]:
         """
         Places inside a map box (north, south, east, west): attractions, restaurants or

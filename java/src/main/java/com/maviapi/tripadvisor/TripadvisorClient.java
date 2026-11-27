@@ -275,6 +275,44 @@ public class TripadvisorClient {
     }
 
     /**
+     * Full detail for up to 50 places in one call: one record per id in the order given,
+     * with name, coordinates, address, website, phone, opening hours, categories, rating,
+     * review count, description and photos. An id that fails gives an error row instead of
+     * failing the call.
+     *
+     * Parameters:
+     *   ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+     *     a hotel, restaurant or attraction from any list endpoint). Records come back in
+     *     this order, one per id
+     *   photos (integer): Photos per place (0 to 20; 0 leaves them out)
+     *   limit (integer): Records per page (1-50)
+     *   offset (integer): Records to skip
+     *   refresh (boolean): Bypass and repopulate the cache
+     */
+    public String placesBatch(Map<String, Object> params) {
+        return get("/places-batch", params, "ids");
+    }
+
+    /**
+     * Same as /places-batch, plus where each place's coordinates came from:
+     * coordinates.source (place_page, map_pin or city_centre) and coordinates.precise
+     * (true only for the place page or map pin). Tours and places the site never pinned
+     * get their city centre, marked not precise.
+     *
+     * Parameters:
+     *   ids (string, required): Comma list of up to 50 TripAdvisor place ids (the id of
+     *     a hotel, restaurant or attraction from any list endpoint). Records come back in
+     *     this order, one per id
+     *   photos (integer): Photos per place (0 to 20; 0 leaves them out)
+     *   limit (integer): Records per page (1-50)
+     *   offset (integer): Records to skip
+     *   refresh (boolean): Bypass and repopulate the cache
+     */
+    public String placesBatchV2(Map<String, Object> params) {
+        return get("/places-batch-v2", params, "ids");
+    }
+
+    /**
      * Places inside a map box (north, south, east, west): attractions, restaurants or
      * hotels, with coordinates, rating, ranking, price level, categories, website, phone,
      * opening hours, address and a thumbnail.
